@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <title>Angular Reddit Clone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
   </head>
 
@@ -20,14 +17,28 @@
   <main>
     <section ng-controller="CreateContentController">
       <div ng-repeat="item in brewingArr">
-        {{item.title}}
-    </div>
+        <img src="./images/{{item.image}}">
+        <h4>{{item.title}}</h4> |
+        <i class="material-icons">thumb_up</i>
+        <i class="material-icons">thumb_down</i>
+        {{item.rating}}</p>
+        <p>By: {{item.author}}</p>
+        <p>{{item.description}}</p>
+        <p><i class="material-icons">today</i>{{item.date}} |
+        <i class="material-icons">comment</i>{{item.comment.length}} Comments |
+        <i class="material-icons">mode_edit</i> Add Comment</p>
+        <hr>
+      </div>
     </section>
   </main>
 
   <body>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
     <script src="./app.js"></script>
     <script src="./controllers/create.content.js"></script>
+
   </body>
 </html>
