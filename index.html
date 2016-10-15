@@ -12,14 +12,22 @@
   </head>
 
   <header>
-    {{1 + 1}}
     <h1>
-      test
+      Brewing Denver
     </h1>
   </header>
+
+  <main>
+    <section ng-controller="CreateContentController">
+      <div ng-repeat="item in brewingArr">
+        {{item.title}}
+    </div>
+    </section>
+  </main>
 
   <body>
 
     <script src="./app.js"></script>
+    <script src="./controllers/create.content.js"></script>
   </body>
 </html>
