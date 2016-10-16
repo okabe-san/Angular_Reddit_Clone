@@ -1,3 +1,14 @@
+/*materialize css*/
+nav {
+  background-color: #999 !important;
+}
+
+.nav-wrapper {
+  padding: 0 20px;
+}
+
+
+
 h1 {
   color: gray;
 }

@@ -9,24 +9,28 @@
   </head>
 
   <body class="container">
-    <header>
-      <h1>
-        Brewing Denver
-      </h1>
+    <header class="headerRow">
+      <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">Brewing Denver</a>
+        <ul class="right hide-on-med-and-down">
+          <li><input type="text" ng-model="search" placeholder="Search"></li>
+        </ul>
+      </div>
+      </nav>
     </header>
-
     <main>
       <section ng-controller="CreateContentController">
-        <div ng-repeat="item in brewingArr">
+        <div ng-repeat="item in brewingArr | filter: search | orderBy:sortBy">
           <img src="">
-          <h4>{{item.title}}</h4>
-          <h5><i ng-controller="RatingController as RatingController">
-            <i class="material-icons icon-pointer" ng-click="RatingController.pulus(item)">thumb_up</i>
+          <h4>{{item.title}} |
+          <i ng-controller="RatingController as RatingController">
+            <i class="material-icons icon-pointer" ng-click="RatingController.plus(item)">thumb_up</i>
           </i>
           <i ng-controller="RatingController as RatingController">
             <i class="material-icons icon-pointer" ng-click="RatingController.minus(item)">thumb_down</i>
           </a>
-          {{item.rating}}</h5>
+          {{item.rating}}</h4>
           <p>By: {{item.author}}</p>
           <p>{{item.description}}</p>
           <p><i class="material-icons">today</i>{{item.date}} |

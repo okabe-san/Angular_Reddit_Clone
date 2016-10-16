@@ -5,7 +5,7 @@
     .controller('RatingController', RatingController);
 
   function RatingController ($rootScope) {
-    this.pulus = (item) => {
+    this.plus = (item) => {
       item.rating++;
     };
     this.minus = (item) => {
