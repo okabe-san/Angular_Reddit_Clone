@@ -10,35 +10,69 @@
 
   <body class="container">
     <header class="headerRow">
+      <ul id="dropdown1" class="dropdown-content" ng-model="sortBy">
+        <li value="rating">Rating</li>
+        <li value="title">Alphabetical</li>
+      </ul>
       <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Brewing Denver</a>
-        <ul class="right hide-on-med-and-down">
-          <li><input type="text" ng-model="search" placeholder="Search"></li>
+        <ul class="hide-on-med-and-down">
+          <li><big>Brewing Denver<big></li>
+          <li><a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed">+ Submit</a></li>
+          <li><a class="dropdown-button" data-activates="dropdown1">+ Sort By:<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><input type="text" ng-model="search" placeholder="+ Search"></li>
         </ul>
       </div>
       </nav>
     </header>
     <main>
-      <section ng-controller="CreateContentController">
-        <div ng-repeat="item in brewingArr | filter: search | orderBy:sortBy">
-          <img src="">
-          <h4>{{item.title}} |
-          <i ng-controller="RatingController as RatingController">
-            <i class="material-icons icon-pointer" ng-click="RatingController.plus(item)">thumb_up</i>
-          </i>
-          <i ng-controller="RatingController as RatingController">
-            <i class="material-icons icon-pointer" ng-click="RatingController.minus(item)">thumb_down</i>
-          </a>
-          {{item.rating}}</h4>
-          <p>By: {{item.author}}</p>
-          <p>{{item.description}}</p>
-          <p><i class="material-icons">today</i>{{item.date}} |
-          <i class="material-icons">comment</i>{{item.comment.length}} Comments |
-          <i class="material-icons">mode_edit</i> Add Comment</p>
+
+      <div ng-controller="addPlaceController as addPlaceController">
+
+        <!-- Form for Add New Place -->
+        <form name="validation" ng-model="collapse" novalidate>
+          <div ng-show="collapsed">
+          <p>Title</p>
+            <input ng-model="item.title" type="text" name="title" ng-minlength=3 ng-maxlength=12 required>
+            <p ng-show="validation.title.$error.minlength">At least 3 letters.</p>
+            <p ng-show="validation.title.$error.maxlength">Less than 12 letters.</p>
+          <p>Author</p>
+            <input ng-model="item.author" type="text" name="author" ng-minlength=3 ng-maxlength=12 required>
+            <p ng-show="validation.author.$error.minlength">At least 3 letters.</p>
+            <p ng-show="validation.author.$error.maxlength">Less than 12 letters.</p>
+          <p>URL</p>
+            <input ng-model="item.url" type="text" name="url">
+          <p>Description</p>
+            <input ng-model="item.description" type="text" name="description" ng-minlength=3 ng-maxlength=500 required>
+            <p ng-show="validation.description.$error.minlength">At least 3 letters.</p>
+            <p ng-show="validation.description.$error.minlength">Less than 500 letter.</p>
           <hr>
+          <button ng-click="addPlaceController.add(item)">Submit</button>
         </div>
-      </section>
+        </form>
+
+        <!-- Display Section for Places -->
+        <section ng-controller="CreateContentController">
+          <div ng-repeat="item in brewingArr | filter: search | orderBy: sortBy">
+            <h4><img src="{{item.image}}">
+            {{item.title}} |
+            <i ng-controller="RatingController as RatingController">
+              <a href="#"><i class="material-icons icon-pointer" ng-click="RatingController.plus(item)">thumb_up</i></a>
+            </i>
+            <i ng-controller="RatingController as RatingController">
+              <a href="#"><i class="material-icons icon-pointer" ng-click="RatingController.minus(item)">thumb_down</i></a>
+            </a>
+            {{item.rating}}</h4>
+            <p>By: {{item.author}}</p>
+            <p>{{item.description}}</p>
+            <p><i class="material-icons">today</i>{{item.date}} |
+            <i class="material-icons">comment</i>{{item.comment.length}} Comments |
+            <i class="material-icons">mode_edit</i> Add Comment</p>
+            <hr>
+          </div>
+        </section>
+
+      </div>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -47,7 +81,7 @@
     <script src="./app.js"></script>
     <script src="./controllers/create.content.js"></script>
     <script src="./controllers/rating.js"></script>
-
+    <script src="./controllers/addPlace.js"></script>
 
   </body>
 </html>
