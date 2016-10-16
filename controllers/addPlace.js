@@ -9,7 +9,11 @@
     $rootScope.brewingArr = [];
     this.add = (info) => {
       $rootScope.brewingArr.push({
-        title: info.title
+        title: info.title,
+        author: info.author,
+        image: info.url,
+        description: info.description,
+        rating: 0
       });
     };
 

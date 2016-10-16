@@ -32,7 +32,7 @@
     <main>
       <div ng-controller="addPlaceController as addPlaceCtrl">
         <!-- Form for Add New Place -->
-        <form name="validation" ng-model="collapsed" novalidate>
+        <form ng-submit="addPlaceCtrl.add(item)" name="validation" ng-model="collapsed" novalidate>
           <div ng-show="collapsed">
             <p>Title</p>
               <input ng-model="item.title" type="text" name="title" ng-minlength=3 ng-maxlength=12 required>
@@ -49,7 +49,7 @@
               <p ng-show="validation.description.$error.minlength">At least 3 letters.</p>
               <p ng-show="validation.description.$error.minlength">Less than 500 letter.</p>
             <hr>
-            <button ng-click="addPlaceCtrl.add(item)">Submit</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
 
@@ -79,9 +79,9 @@
                   <p ng-show="validation.name.$error.minlength">At least 3 letters.</p>
                   <p ng-show="validation.name.$error.maxlength">Less than 12 letters.</p>
                 <p>Comment</p>
-                  <input ng-model="comment.comment" type="text" name="comment" ng-minlength=3 ng-maxlength=12 required>
+                  <input ng-model="comment.comment" type="text" name="comment" ng-minlength=3 ng-maxlength=500 required>
                   <p ng-show="validation.comment.$error.minlength">At least 3 letters.</p>
-                  <p ng-show="validation.comment.$error.maxlength">Less than 12 letters.</p>
+                  <p ng-show="validation.comment.$error.maxlength">Less than 500 letters.</p>
                 <button type="submit">Submit</button>
               </div>
             </form>
