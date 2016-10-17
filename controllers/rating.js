@@ -10,6 +10,6 @@
     };
     this.minus = (item) => {
       item.rating--;
-    }
+    };
   }
-})()
+})();
