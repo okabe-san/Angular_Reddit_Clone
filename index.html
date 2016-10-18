@@ -9,8 +9,7 @@
   </head>
 
   <body class="container">
-  {{ date_expression | date : format : timezone}}
-
+    <div ng-controller="CreateContentController as main">
     <header>
       <nav>
         <div class="nav-wrapper">
@@ -33,7 +32,7 @@
     <main>
       <div ng-controller="addPlaceController as addPlaceCtrl">
         <!-- Form for Add New Place -->
-        <form ng-submit="addPlaceCtrl.add(item)" name="validation" ng-model="collapsed" novalidate>
+        <form ng-submit="addPlaceCtrl.add(item)" name="validation" novalidate>
           <div ng-show="collapsed">
             <p>Title</p>
               <input ng-model="item.title" type="text" name="title" ng-minlength=3 ng-maxlength=12 required>
@@ -50,7 +49,7 @@
               <p ng-show="validation.description.$error.minlength">At least 3 letters.</p>
               <p ng-show="validation.description.$error.minlength">Less than 500 letter.</p>
             <hr>
-            <button type="submit">Submit</button>
+            <button type="submit" ng-click="collapsed=!collapsed">Submit</button>
           </div>
         </form>
 
@@ -68,8 +67,10 @@
             <span ng-class="{minus: item.rating < 0, plus: item.rating >= 0}">{{item.rating}}</span></h4>
             <p>By: {{item.author}}</p>
             <p>{{item.description}}</p>
-            <p><i class="material-icons">today</i>{{item.date}} |
-            <a href="#" ng-model="collapsedComments" ng-click="collapsedComments=!collapsedComments"><i class="material-icons">comment</i>Comments </a>|
+            <p><i class="material-icons">today</i>{{item.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}} |
+            <a href="#" ng-model="collapsedComments" ng-click="collapsedComments=!collapsedComments"><i class="material-icons">comment</i>
+              <ng-pluralize count="item.reviews.length" when="{'1' : ' Comment', 'other': ' Comments '}">Comment</ng-pluralize>
+            </a>|
             <a href="#" ng-model="showComment" ng-click="showComment=!showComment"><i class="material-icons">mode_edit</i>Add Comment</a></p>
 
             <!-- Form for Add Comment -->
@@ -83,7 +84,7 @@
                   <input ng-model="comment.comment" type="text" name="comment" ng-minlength=3 ng-maxlength=500 required>
                   <p ng-show="validation.comment.$error.minlength">At least 3 letters.</p>
                   <p ng-show="validation.comment.$error.maxlength">Less than 500 letters.</p>
-                <button type="submit">Submit</button>
+                <button type="submit"  ng-click="showComment=!showComment">Submit</button>
               </div>
             </form>
 
@@ -98,10 +99,13 @@
         </section>
       </div>
     </main>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
     <script src="./app.js"></script>
     <script src="./controllers/create.content.js"></script>
     <script src="./controllers/rating.js"></script>

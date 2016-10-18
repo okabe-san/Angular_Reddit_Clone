@@ -6,6 +6,10 @@
 
   function addPlaceController ($rootScope) {
     // console.log($rootScope);
+    // this.collapsed = $rootScope.collapsed;
+    // this.toggleForm = () => {
+    //   $rootScope.collapsed = !$rootScope.collapsed;
+    // }
     $rootScope.brewingArr = [];
     this.add = (info) => {
       $rootScope.brewingArr.push({
@@ -13,8 +17,10 @@
         author: info.author,
         image: info.url,
         description: info.description,
-        rating: 0
+        rating: 0,
+        date: new Date()
       });
+
     };
 
     this.addComment = (place, comment) => {
