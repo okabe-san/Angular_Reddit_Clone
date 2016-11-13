@@ -63,11 +63,12 @@
             </i>
             <i ng-controller="RatingController as RatingController">
               <a href="#"><i class="material-icons icon-pointer" ng-click="RatingController.minus(item)">thumb_down</i></a>
-            </a>
+            </i>
             <span ng-class="{minus: item.rating < 0, plus: item.rating >= 0}">{{item.rating}}</span></h4>
             <p>By: {{item.author}}</p>
             <p>{{item.description}}</p>
             <p><i class="material-icons">today</i>{{item.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}} |
+
             <a href="#" ng-model="collapsedComments" ng-click="collapsedComments=!collapsedComments"><i class="material-icons">comment</i>
               <ng-pluralize count="item.reviews.length" when="{'1' : ' Comment', 'other': ' Comments '}">Comment</ng-pluralize>
             </a>|
